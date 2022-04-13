@@ -1,0 +1,129 @@
+# C++读取txt数据并生成图像，识别圆
+在Visual Studio2019中配置OpenCV的C++环境是比较麻烦和困难的，需要反复操作，这部分我会专门写一篇文章去记录。今天这篇文章只记录如何将数据生成图像，并识别图像中的圆。
+
+首先，环境装好后，开始编程。
+#include相关的包
+'
+#include <iostream>
+#include <opencv2/core/core.hpp>
+#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/imgproc.hpp>
+#include<opencv2/imgproc/imgproc.hpp> 
+#include<vector>
+#include<fstream>
+#include<typeinfo>
+'
+包都包含好之后，需要添加环境变量
+using namespace cv;
+using namespace std;
+读取txt中的数据
+注意，程序中所使用的数组以及全局变量声明省略了，使用时自己根据需要申请内存空间。
+int len_data = 256*256;
+int read_txt()
+{
+	ifstream infile;         //定义读取文件流，相对于程序来说是in
+	infile.open("E:\\data.txt");          //打开文件
+	for (int i = 0; i < len_data; i++)      //定义行循环
+	{
+        //读取一个值（空格、制表符、换行隔开）就写入到矩阵中，行列不断循环进行
+		infile >> data_all[i];	
+    }
+	infile.close();                       //读取完成之后关闭文件
+	return 0;
+}
+注意，C++读取txt的数据是按照流进行读取的，不区分空格还是换行符，数据以空格或者换行符为分隔符。
+数据生成图像
+由于图像颜色的分布是0~255的，所以在生成彩色图像时，也必须将数据范围固定到0~255的范围，先进行数据归一化。也可以选择你们自己的归一化程序进行归一化。
+normalize_MaxMin(data_all, 65536, 255);   //进行0~255的最大最小归一化
+int max_position(float* a, int len_a)
+{
+	//计算最小值所在的位置
+	int position = 0;
+	float max_y = -65535;               //初始化一个最大值
+	for (int i = 0; i < len_a; i++)
+	{
+	    if (a[i] > max_y)
+	    {
+	        max_y = a[i];
+	        position = i;
+	    }
+	}
+	return position;
+}
+
+int min_position(float* a, int len_a)
+{
+	//计算最小值所在的位置
+	int position = 0;
+	float min_y = 65535;               //初始化一个最大值
+	for (int i = 0; i < len_a; i++)
+	{
+	    if (a[i] < min_y)
+	    {
+	        min_y = a[i];
+	        position = i;
+	    }
+	}
+	return position;
+}
+	
+void normalize_MaxMin(float* x, int len_x, int multiple)
+{
+	//最大最小归一化到0~multiple；
+	float max_x = x[max_position(x, len_x)];
+	float min_x = x[min_position(x, len_x)];
+	for (int i = 0; i < len_x; i++)
+	{
+	   x[i] = ((float)(x[i] - min_x) / (float)(max_x - min_x))*multiple;
+	}
+}
+//一维矩阵转二维矩阵
+for (int p = 0; p < 256; p++)
+{
+	  for (int q = 0; q < 256; q++)
+	  {
+		  data_C2[q][p] = data_C[p * 256 + q];
+	  }
+}
+下一步将数据转换为二维矩阵，然后转化成Mat格式。Mat格式是OpenCV的特有图像格式。包含了头尾在内的一些图像本身的彩色，灰度等特征信息。下面将数据生成二维图。
+//把数据生成256*256的图
+Mat srcImage = Mat(Size(256, 256), CV_32F, data_C2);
+Mat im_color;
+srcImage.convertTo(im_color, CV_8UC1, 255.0 / 255); //映射从CV_32F转换到CV_8U 的0-255
+注意，这才是本文的核心，也是我查阅很多资料，自己尝试了很多方法和参数才得出来的生成方式，除了数组大小外不建议调整，如果有更好的生成方式欢迎留言讨论。
+
+上面先将二维数组生成一个Mat格式的数据，数据使用32位的Float格式的数据。CV_32F是像素是在0-1.0之间的任意值，这对于一些数据集的计算很有用，但是它必须通过将每个像素乘以255来转换成8位来保存或显示。
+
+srcImage.convertTo负责转换数据类型，将srcImage映射从CV_32F转换到CV_8U 的0-255并赋值给im_color。
+
+检测圆并显示结果
+vector<Vec3f> circles;
+
+double dp = 2;
+double minDist = 100;                         //两个圆心之间的最小距离
+double param1 = 10;                           //Canny边缘检测的较大阈值
+double param2 = 100;                          //累加器阈值
+int min_radius = 0;                                                        //圆形半径的最小值
+int max_radius = 1000;                                                     //圆形半径的最大值
+//识别圆形
+HoughCircles(im_color, circles, HOUGH_GRADIENT, dp, minDist, param1, param2, min_radius, max_radius);
+//在图像中标记出圆形
+for (size_t i = 0; i < circles.size(); i++)
+{
+	//读取圆心
+	Point center(cvRound(circles[i][0]), cvRound(circles[i][1]));
+	//读取半径
+	int radius = cvRound(circles[i][2]);
+	//绘制圆心
+	circle(im_color,center,3,Scalar(0,255,0),-1,8,0);
+	//绘制图
+	circle(im_color, center, radius, Scalar(0, 0, 255), 3, 8, 0);
+	//cout << radius << endl;
+}
+//显示结果
+imshow("Circle in picture", im_color);
+waitKey(0);
+return 0;
+}
+上面代码块的备注比较全，具体不做更多解释，具体的参数可以自己调整或者实验。效果是可以在绘制的图形中，画出圆心和圆周，效果如下图。
+图片: https://uploader.shimo.im/f/5AGdNZqSi2uWgYze.jpg!thumbnail?accessToken=eyJhbGciOiJIUzI1NiIsImtpZCI6ImRlZmF1bHQiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhY2Nlc3NfcmVzb3VyY2UiLCJleHAiOjE2NDk4MTY3MTIsImciOiJnWHFtZVlkMmw5Y29ybXFvIiwiaWF0IjoxNjQ5ODE2NDEyLCJ1c2VySWQiOjI4Mjg0MTQwfQ.M12aLm0elQv4onsIj68auSuhgm2i9r4_TSEvKA5ZzDo
