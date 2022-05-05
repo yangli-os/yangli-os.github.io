@@ -88,7 +88,7 @@ y=[z/float(sum(degree_distribute))for z in degree_distribute]
 plt.loglog(x,y)
 plt.show()
 ```
-参考链接：https://zhuanlan.zhihu.com/p/58594681
+参考链接: [Facebook社交网络的特征--基于小世界网络](https://zhuanlan.zhihu.com/p/58594681)\
 ## 画图
 
 ### 绘制散点矩阵图
