@@ -151,6 +151,7 @@ plt.show()
 pd.DataFrame(save_data).to_csv(save_path) # save_data可以是list形式的二维表格
 save_date.to_excel(save_path,index = False)# save_data是DataFrame格式的数据# index = False表示没有行标签
 ```
-
+## 生成关系网络
+使用Gephi或者network可以生成关系网络，直接加载两个关系列，然后需要调整K-核心和巨人组件。
 ## 我的博客主页
 [我的博客主页](https://yangli-os.github.io "我的博客主页")
