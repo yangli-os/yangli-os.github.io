@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Yang Li">
+    
+    <title>
+        
+            社交网络分析方法以及基本图例 |
+        
+        YangLi&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yangli-os.github.io","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066cc","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                YangLi&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">社交网络分析方法以及基本图例</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yang Li</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-05-06 16:21:52</span>
+        <span class="mobile">2022-05-06 16:21</span>
+    </span>
+    
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="社交网络分析方法以及基本图例"><a href="#社交网络分析方法以及基本图例" class="headerlink" title="社交网络分析方法以及基本图例"></a>社交网络分析方法以及基本图例</h1><h2 id="数据读取"><a href="#数据读取" class="headerlink" title="数据读取"></a>数据读取</h2><p>我一般会使用pandas和os的包读取我的数据。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line">import os</span><br><span class="line">import numpy as pd</span><br><span class="line">from collections import Counter               # 基本计数库</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 为方便数据和程序文件的移动，一般采用相对路径，可以使用“../”的形式，但建议使用os.getcwd获取当前程序路径，进行路径拼接</span><br><span class="line"></span><br><span class="line">origin_path = os.getcwd()</span><br><span class="line"># 获取当前文件夹下所有的文件的列表</span><br><span class="line">File_list = os.listdir(origin_path)</span><br><span class="line">source_path = os.path.join(origin_path,&quot;data.csv&quot;)</span><br></pre></td></tr></table></figure>
+<p>在数据读取时一般有几种数据格式：csv，xlsx，txt等。<br>数据也有几种不同的格式：GBK,UTF-8，ISO-8859-1等。<br>数据也有是否有表头，是否有行标签等。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">df1 = pd.read_csv(source_path,header = None)        # 无表头的读取方式</span><br><span class="line">df1 = pd.read_excel(source_path,encoding = &#x27;utf-8&#x27;) # 以utf-8格式存储的数据</span><br><span class="line"></span><br><span class="line"># 显示一些数据基本信息</span><br><span class="line">df1.columns                                         # 显示数据列标签</span><br><span class="line">df1.iloc[i]                                         # 以字典形式显示第i行</span><br></pre></td></tr></table></figure>
+<h2 id="数据层面的操作"><a href="#数据层面的操作" class="headerlink" title="数据层面的操作"></a>数据层面的操作</h2><p>数据层面的操作更多依赖于pandas和numpy两个库，依赖的数据类型主要是DataFrame，array等。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 分割矩阵</span><br><span class="line"># 数据，等分份数，分割方式axis=0/1 上下/左右</span><br><span class="line">dx,b = np.split(data,2,axis=0)        # 上下均等分离矩阵</span><br><span class="line">dy = b.reset_index(drop=True)         # 对第二个矩阵重新赋index，不然会出现index缺失导致逻辑错误</span><br><span class="line"></span><br><span class="line"># 建立一个长度为Nob_dict的全0,int型矩阵</span><br><span class="line">Second_list = np.zeros((len(Nob_dict),len(Nob_dict)),dtype=np.int)</span><br><span class="line"># 为矩阵添加行列标签</span><br><span class="line">Frame_Second = pd.DataFrame(Second_list,columns = list(Nob_dict.values()),index = list(Nob_dict.values()))</span><br></pre></td></tr></table></figure>
+<p>获取数据标签的集合，使用字典</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 获取ID的字典，若不在ID字典当中，则扩充字典。max_dict为最后一个ID的序号，后续序号需要进行+1</span><br><span class="line">Nob_dict = &#123;&#125;</span><br><span class="line">for i in range(len(df1[&quot;Gotchi&quot;])):      # Gotchi为计数列</span><br><span class="line">    Nob_dict.update(&#123;df1[&quot;Gotchi&quot;][i]:i+1&#125;)</span><br><span class="line">    max_dict = i+1</span><br></pre></td></tr></table></figure>
+<p>DataFrame上的批量操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">df2 = pd.DataFrame(columns=df1.columns)# columns可选，是否创建列名</span><br><span class="line">df2 = df2.append([dict(df1.iloc[i])],ignore_index=True) # 可以使用append的形式以行添加dict形式的一行数据ignore_index是以行形式添加</span><br><span class="line"></span><br><span class="line">boston = pd.concat([features,label],axis =1) # 合并按照列合并数据</span><br></pre></td></tr></table></figure>
+<p>数据排序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sorted(list(boston[&#x27;feature&#x27;]),reverse=True) # 排序，以倒叙进行排序</span><br></pre></td></tr></table></figure>
+<p>计算特征数量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Counter(df1[&#x27;feature&#x27;]).most_common # 按照数量最多的开始显示，可选参数为个数</span><br></pre></td></tr></table></figure>
+<p>计算相关系数和对应的显著性</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">r,p_value = stats.pearsonr(boston[&#x27;feature1&#x27;],boston[&#x27;feature2&#x27;]) # 计算相关系数和对应的显著性</span><br><span class="line">print(&#x27;feature1与feature1相关系数为&#123;:.3f&#125;,p值为&#123;:.5f&#125;&#x27;.format(r,p_value)) # 相关系数保留3位小数，p值保留5位小数</span><br></pre></td></tr></table></figure>
+<p>透视表格重构</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buyer_seller = buyer_seller.pivot_table(index=&#x27;feature&#x27;, columns=&#x27;index&#x27;, values=&#x27;Value&#x27;).fillna(0)</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成网络节点图"><a href="#生成网络节点图" class="headerlink" title="生成网络节点图"></a>生成网络节点图</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import networkx as nx</span><br><span class="line"></span><br><span class="line"># 计算平均度</span><br><span class="line">edgeNum = 5000    # 边数</span><br><span class="line">nodeNum = 1878    # 节点数</span><br><span class="line">average_degree=edgeNum*2.0/nodeNum</span><br><span class="line">print(&quot;平均度：&quot;+str(average_degree))</span><br><span class="line">degree_distribute=nx.degree_histogram(buyer_seller_or) # buyer_seller_or关系列</span><br><span class="line">x=range(len(degree_distribute))</span><br><span class="line">y=[z/float(sum(degree_distribute))for z in degree_distribute]</span><br><span class="line">plt.loglog(x,y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p>参考链接: <a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/58594681" >Facebook社交网络的特征–基于小世界网络<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="画图"><a href="#画图" class="headerlink" title="画图"></a>画图</h2><h3 id="绘制散点矩阵图"><a href="#绘制散点矩阵图" class="headerlink" title="绘制散点矩阵图"></a>绘制散点矩阵图</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.pyplot as plt</span><br><span class="line">import seaborn as seb</span><br><span class="line">seb.pairplot(data = boston,vars = [feature]) # feature是所选的特征</span><br><span class="line">plt.savefig(&#x27;scatter fig.png&#x27;,dpi=500,hue=&quot;species&quot;)#绘图结果存到本地</span><br></pre></td></tr></table></figure>
+<h3 id="绘制相关系数的热力图"><a href="#绘制相关系数的热力图" class="headerlink" title="绘制相关系数的热力图"></a>绘制相关系数的热力图</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import seaborn as seb</span><br><span class="line">r_pearson = boston.corr()</span><br><span class="line">#seb.heatmap(data = r_pearson)</span><br><span class="line">seb.heatmap(data = r_pearson,cmap=&quot;YlGnBu&quot;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="绘制散点图"><a href="#绘制散点图" class="headerlink" title="绘制散点图"></a>绘制散点图</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plt.scatter([x for x in range(len(boston[&#x27;feature&#x27;]))],boston[&#x27;feature&#x27;]) #绘制y的曲线</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h3 id="绘制正太曲线图"><a href="#绘制正太曲线图" class="headerlink" title="绘制正太曲线图"></a>绘制正太曲线图</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">import matplotlib.mlab as mlab</span><br><span class="line">import seaborn as sns</span><br><span class="line"></span><br><span class="line">import warnings</span><br><span class="line">warnings.filterwarnings(&#x27;ignore&#x27;) # 不发出警告</span><br><span class="line"></span><br><span class="line">sns.set(context=&#x27;notebook&#x27;,font=&#x27;simhei&#x27;,style=&#x27;whitegrid&#x27;)# 设置风格尺度和显示中文</span><br><span class="line">plt.rcParams[&#x27;axes.unicode_minus&#x27;]=False # 用来正常显示负号</span><br><span class="line"> </span><br><span class="line"># 直方图</span><br><span class="line">from scipy.stats import norm # 使用直方图和最大似然高斯分布拟合绘制分布</span><br><span class="line"></span><br><span class="line">s=np.log(list(boston[&#x27;feature&#x27;])) # 特征数据np.log(list)幂律分布</span><br><span class="line">s=boston[&#x27;feature&#x27;]               # 特征数据正太分布</span><br><span class="line"></span><br><span class="line">mu =np.mean(s) # 计算均值 </span><br><span class="line">sigma =np.std(s) </span><br><span class="line">num_bins = len(s) # 直方图柱子的数量 </span><br><span class="line">n, bins, patches = plt.hist(s, num_bins, density=1, facecolor=&#x27;blue&#x27;, alpha=0.55,width = 0.0050) </span><br><span class="line"># 直方图函数，x为x轴的值，normed=1表示为概率密度，即和为一，绿色方块，色深参数0.55，返回n个概率，直方块左边线的x值，及各个方块对象 </span><br><span class="line">y = norm.pdf(bins, mu, sigma)#拟合一条最佳正态分布曲线y</span><br><span class="line">#str=&#x27;Histogram : $\mu=5.8433$&#x27;+str(mu)+&#x27;,$\sigma=0.8253$&#x27;;</span><br><span class="line">plt.grid(False) # 无网格</span><br><span class="line">plt.plot(bins, y, &#x27;r--&#x27;) # 绘制y的曲线 </span><br><span class="line">plt.xlabel(&#x27;x-label&#x27;) # 绘制x轴 </span><br><span class="line">plt.ylabel(&#x27;y-label&#x27;) #绘制y轴 </span><br><span class="line">plt.title(r&#x27;Histogram : $\mu=&#123;&#125;$，$\sigma=&#123;&#125;$&#x27;.format(mu,sigma)) # 在题目中显示mu与sigma</span><br><span class="line"></span><br><span class="line">#plt.subplots_adjust(left=0.15) # 左边距 </span><br><span class="line">plt.savefig(&#x27;Probability fig.png&#x27;,dpi=1000,bbox_inches = &#x27;tight&#x27;) # 绘图结果存到本地</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h2 id="保存数据"><a href="#保存数据" class="headerlink" title="保存数据"></a>保存数据</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pd.DataFrame(save_data).to_csv(save_path) # save_data可以是list形式的二维表格</span><br><span class="line">save_date.to_excel(save_path,index = False)# save_data是DataFrame格式的数据# index = False表示没有行标签</span><br></pre></td></tr></table></figure>
+<h2 id="生成关系网络"><a href="#生成关系网络" class="headerlink" title="生成关系网络"></a>生成关系网络</h2><p>使用Gephi或者network可以生成关系网络，直接加载两个关系列，然后需要调整K-核心和巨人组件。</p>
+<h2 id="我的博客主页"><a href="#我的博客主页" class="headerlink" title="我的博客主页"></a>我的博客主页</h2><p><a href="https://yangli-os.github.io/" title="我的博客主页">我的博客主页</a></p>
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/05/06/C++%E8%AF%BB%E5%8F%96txt%E6%95%B0%E6%8D%AE%E5%B9%B6%E7%94%9F%E6%88%90%E5%9B%BE%E5%83%8F%EF%BC%8C%E8%AF%86%E5%88%AB%E5%9C%86/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">C++读取txt数据并生成图像，识别圆</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Yang Li</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>
