@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Yang Li">
+    
+    <title>
+        
+            C++读取txt数据并生成图像，识别圆 |
+        
+        YangLi&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yangli-os.github.io","root":"/","language":"en"};
+    KEEP.theme_config = {"toc":{"enable":false,"number":false,"expand_all":false,"init_open":false},"style":{"primary_color":"#0066cc","avatar":"/images/avatar.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"Keep writing and Keep loving."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                YangLi&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">C++读取txt数据并生成图像，识别圆</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yang Li</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-05-06 16:18:37</span>
+        <span class="mobile">2022-05-06 16:18</span>
+    </span>
+    
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <h1 id="C-读取txt数据并生成图像，识别圆"><a href="#C-读取txt数据并生成图像，识别圆" class="headerlink" title="C++读取txt数据并生成图像，识别圆"></a>C++读取txt数据并生成图像，识别圆</h1><p>在Visual Studio2019中配置OpenCV的C++环境是比较麻烦和困难的，需要反复操作，这部分我会专门写一篇文章去记录。今天这篇文章只记录如何将数据生成图像，并识别图像中的圆。</p>
+<p>首先，环境装好后，开始编程。</p>
+<h2 id="include相关的包"><a href="#include相关的包" class="headerlink" title="#include相关的包"></a>#include相关的包</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;opencv2/core/core.hpp&gt;</span><br><span class="line">#include &lt;opencv2/highgui/highgui.hpp&gt;</span><br><span class="line">#include &lt;opencv2/imgproc.hpp&gt;</span><br><span class="line">#include&lt;opencv2/imgproc/imgproc.hpp&gt; </span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line">#include&lt;fstream&gt;</span><br><span class="line">#include&lt;typeinfo&gt;</span><br></pre></td></tr></table></figure>
+<p>包都包含好之后，需要添加环境变量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">using namespace cv;</span><br><span class="line">using namespace std;</span><br></pre></td></tr></table></figure>
+<p>读取txt中的数据<br>注意，程序中所使用的数组以及全局变量声明省略了，使用时自己根据需要申请内存空间。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">int len_data = 256*256;</span><br><span class="line">int read_txt()</span><br><span class="line">&#123;</span><br><span class="line">	ifstream infile;         //定义读取文件流，相对于程序来说是in</span><br><span class="line">	infile.open(&quot;E:\\data.txt&quot;);          //打开文件</span><br><span class="line">	for (int i = 0; i &lt; len_data; i++)      //定义行循环</span><br><span class="line">	&#123;</span><br><span class="line">     //读取一个值（空格、制表符、换行隔开）就写入到矩阵中，行列不断循环进行</span><br><span class="line">		infile &gt;&gt; data_all[i];	</span><br><span class="line">    &#125;</span><br><span class="line">	infile.close();                       //读取完成之后关闭文件</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意，C++读取txt的数据是按照流进行读取的，不区分空格还是换行符，数据以空格或者换行符为分隔符。<br>由于图像颜色的分布是0-255的，所以在生成彩色图像时，也必须将数据范围固定到0-255的范围，先进行数据归一化。也可以选择你们自己的归一化程序进行归一化。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">normalize_MaxMin(data_all, 65536, 255);   //进行0~255的最大最小归一化</span><br><span class="line">int max_position(float* a, int len_a)</span><br><span class="line">&#123;</span><br><span class="line">	//计算最小值所在的位置</span><br><span class="line">	int position = 0;</span><br><span class="line">	float max_y = -65535;               //初始化一个最大值</span><br><span class="line">	for (int i = 0; i &lt; len_a; i++)</span><br><span class="line">	&#123;</span><br><span class="line">	    if (a[i] &gt; max_y)</span><br><span class="line">	    &#123;</span><br><span class="line">	        max_y = a[i];</span><br><span class="line">	        position = i;</span><br><span class="line">	    &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return position;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int min_position(float* a, int len_a)</span><br><span class="line">&#123;</span><br><span class="line">	//计算最小值所在的位置</span><br><span class="line">	int position = 0;</span><br><span class="line">	float min_y = 65535;               //初始化一个最大值</span><br><span class="line">	for (int i = 0; i &lt; len_a; i++)</span><br><span class="line">	&#123;</span><br><span class="line">	    if (a[i] &lt; min_y)</span><br><span class="line">	    &#123;</span><br><span class="line">	        min_y = a[i];</span><br><span class="line">	        position = i;</span><br><span class="line">	    &#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return position;</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line">void normalize_MaxMin(float* x, int len_x, int multiple)</span><br><span class="line">&#123;</span><br><span class="line">	//最大最小归一化到0~multiple；</span><br><span class="line">	float max_x = x[max_position(x, len_x)];</span><br><span class="line">	float min_x = x[min_position(x, len_x)];</span><br><span class="line">	for (int i = 0; i &lt; len_x; i++)</span><br><span class="line">	&#123;</span><br><span class="line">	   x[i] = ((float)(x[i] - min_x) / (float)(max_x - min_x))*multiple;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">//一维矩阵转二维矩阵</span><br><span class="line">for (int p = 0; p &lt; 256; p++)</span><br><span class="line">&#123;</span><br><span class="line">	  for (int q = 0; q &lt; 256; q++)</span><br><span class="line">	  &#123;</span><br><span class="line">		  data_C2[q][p] = data_C[p * 256 + q];</span><br><span class="line">	  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下一步将数据转换为二维矩阵，然后转化成Mat格式。Mat格式是OpenCV的特有图像格式。包含了头尾在内的一些图像本身的彩色，灰度等特征信息。下面将数据生成二维图。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//把数据生成256*256的图</span><br><span class="line">Mat srcImage = Mat(Size(256, 256), CV_32F, data_C2);</span><br><span class="line">Mat im_color;</span><br><span class="line">srcImage.convertTo(im_color, CV_8UC1, 255.0 / 255); //映射从CV_32F转换到CV_8U 的0-255</span><br></pre></td></tr></table></figure>
+<p>注意，这才是本文的核心，也是我查阅很多资料，自己尝试了很多方法和参数才得出来的生成方式，除了数组大小外不建议调整，如果有更好的生成方式欢迎留言讨论。</p>
+<p>上面先将二维数组生成一个Mat格式的数据，数据使用32位的Float格式的数据。CV_32F是像素是在0-1.0之间的任意值，这对于一些数据集的计算很有用，但是它必须通过将每个像素乘以255来转换成8位来保存或显示。</p>
+<p>srcImage.convertTo负责转换数据类型，将srcImage映射从CV_32F转换到CV_8U 的0-255并赋值给im_color。</p>
+<p>检测圆并显示结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;Vec3f&gt; circles;</span><br><span class="line"></span><br><span class="line">double dp = 2;</span><br><span class="line">double minDist = 100;                         //两个圆心之间的最小距离</span><br><span class="line">double param1 = 10;                           //Canny边缘检测的较大阈值</span><br><span class="line">double param2 = 100;                          //累加器阈值</span><br><span class="line">int min_radius = 0;                                                        //圆形半径的最小值</span><br><span class="line">int max_radius = 1000;                                                     //圆形半径的最大值</span><br><span class="line">//识别圆形</span><br><span class="line">HoughCircles(im_color, circles, HOUGH_GRADIENT, dp, minDist, param1, param2, min_radius, max_radius);</span><br><span class="line">//在图像中标记出圆形</span><br><span class="line">for (size_t i = 0; i &lt; circles.size(); i++)</span><br><span class="line">&#123;</span><br><span class="line">	//读取圆心</span><br><span class="line">	Point center(cvRound(circles[i][0]), cvRound(circles[i][1]));</span><br><span class="line">	//读取半径</span><br><span class="line">	int radius = cvRound(circles[i][2]);</span><br><span class="line">	//绘制圆心</span><br><span class="line">	circle(im_color,center,3,Scalar(0,255,0),-1,8,0);</span><br><span class="line">	//绘制图</span><br><span class="line">	circle(im_color, center, radius, Scalar(0, 0, 255), 3, 8, 0);</span><br><span class="line">	//cout &lt;&lt; radius &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line">//显示结果</span><br><span class="line">imshow(&quot;Circle in picture&quot;, im_color);</span><br><span class="line">waitKey(0);</span><br><span class="line">return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码块的备注比较全，具体不做更多解释，具体的参数可以自己调整或者实验。效果是可以在绘制的图形中，画出圆心和圆周，效果如下图所示。</p>
+<p><img src="https://user-images.githubusercontent.com/47737324/163091725-248a5173-5ee9-4e9c-b2e6-df246b6e2cb9.jpg" alt="1649818948(1)"></p>
+<h2 id="我的博客主页"><a href="#我的博客主页" class="headerlink" title="我的博客主页"></a>我的博客主页</h2><p><a href="https://yangli-os.github.io/" title="我的博客主页">我的博客主页</a></p>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Yang Li</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+
+
+
+<div class="post-scripts">
+    
+</div>
+
+
+
+</body>
+</html>
