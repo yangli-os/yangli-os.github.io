@@ -19,8 +19,10 @@
 <h2 id="检测圆并显示结果"><a href="#检测圆并显示结果" class="headerlink" title="检测圆并显示结果"></a>检测圆并显示结果</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vector&lt;Vec3f&gt; circles;</span><br><span class="line"></span><br><span class="line">double dp = 2;</span><br><span class="line">double minDist = 100;                         //两个圆心之间的最小距离</span><br><span class="line">double param1 = 10;                           //Canny边缘检测的较大阈值</span><br><span class="line">double param2 = 100;                          //累加器阈值</span><br><span class="line">int min_radius = 0;                                                        //圆形半径的最小值</span><br><span class="line">int max_radius = 1000;                                                     //圆形半径的最大值</span><br><span class="line">//识别圆形</span><br><span class="line">HoughCircles(im_color, circles, HOUGH_GRADIENT, dp, minDist, param1, param2, min_radius, max_radius);</span><br><span class="line">//在图像中标记出圆形</span><br><span class="line">for (size_t i = 0; i &lt; circles.size(); i++)</span><br><span class="line">&#123;</span><br><span class="line">	//读取圆心</span><br><span class="line">	Point center(cvRound(circles[i][0]), cvRound(circles[i][1]));</span><br><span class="line">	//读取半径</span><br><span class="line">	int radius = cvRound(circles[i][2]);</span><br><span class="line">	//绘制圆心</span><br><span class="line">	circle(im_color,center,3,Scalar(0,255,0),-1,8,0);</span><br><span class="line">	//绘制图</span><br><span class="line">	circle(im_color, center, radius, Scalar(0, 0, 255), 3, 8, 0);</span><br><span class="line">	//cout &lt;&lt; radius &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line">//显示结果</span><br><span class="line">imshow(&quot;Circle in picture&quot;, im_color);</span><br><span class="line">waitKey(0);</span><br><span class="line">return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>上面代码块的备注比较全，具体不做更多解释，具体的参数可以自己调整或者实验。效果是可以在绘制的图形中，画出圆心和圆周，效果如下图所示。</p>
 <p><img src="https://user-images.githubusercontent.com/47737324/163091725-248a5173-5ee9-4e9c-b2e6-df246b6e2cb9.jpg" alt="效果图"></p>
-<h2 id="我的博客主页"><a href="#我的博客主页" class="headerlink" title="我的博客主页"></a>我的博客主页</h2><p><a href="https://yangli-os.github.io/" title="我的博客主页">我的博客主页</a></p>
 ]]></content>
+      <tags>
+        <tag>C++</tag>
+      </tags>
   </entry>
   <entry>
     <title>社交网络分析方法以及基本图例</title>
@@ -51,10 +53,9 @@
 <p><img src="https://raw.githubusercontent.com/yangli-os/image-hosting/master/20220507/%E6%AD%A3%E5%A4%AA%E6%9B%B2%E7%BA%BF%E5%9B%BE.7jimwt3v0jg0.webp" alt="正太曲线图"></p>
 <h2 id="保存数据"><a href="#保存数据" class="headerlink" title="保存数据"></a>保存数据</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pd.DataFrame(save_data).to_csv(save_path) # save_data可以是list形式的二维表格</span><br><span class="line">save_date.to_excel(save_path,index = False)# save_data是DataFrame格式的数据# index = False表示没有行标签</span><br></pre></td></tr></table></figure>
 <h2 id="生成关系网络"><a href="#生成关系网络" class="headerlink" title="生成关系网络"></a>生成关系网络</h2><p>使用Gephi或者network可以生成关系网络，直接加载两个关系列，然后需要调整K-核心和巨人组件。</p>
-<h2 id="我的博客主页"><a href="#我的博客主页" class="headerlink" title="我的博客主页"></a>我的博客主页</h2><p><a href="https://yangli-os.github.io/" title="我的博客主页">我的博客主页</a></p>
 ]]></content>
       <tags>
-        <tag>python,social net</tag>
+        <tag>Python</tag>
       </tags>
   </entry>
 </search>
