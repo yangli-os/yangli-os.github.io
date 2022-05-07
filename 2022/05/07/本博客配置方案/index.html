@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Yang Li">
+    
+    <title>
+        
+            本博客配置方案 |
+        
+        YangLi&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.svg">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/css/font-awesome.min.css">
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"yangli-os.github.io","root":"/","language":"en","path":"search.xml"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066cc","avatar":"/images/饼干.svg","favicon":"/images/logo.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"Keep Fighting."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true,"trigger":"auto","unescape":false},"code_copy":{"enable":true,"style":"default"},"side_tools":{"enable":true},"pjax":{"enable":true},"lazyload":{"enable":false},"version":"3.4.5"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <span class="pjax-progress-icon">
+            <i class="fas fa-circle-notch fa-spin"></i>
+        </span>
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                YangLi&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                HOME
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                ARCHIVES
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">HOME</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">ARCHIVES</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">本博客配置方案</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/%E9%A5%BC%E5%B9%B2.svg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Yang Li</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-05-07 15:53:06</span>
+        <span class="mobile">2022-05-07 15:53</span>
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Technology/">Technology</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>记录下本博客的配置方案，以方便之后进行查验，其他人可以参考我的配置。</p>
+<h1 id="方案概述"><a href="#方案概述" class="headerlink" title="方案概述"></a>方案概述</h1><p>我的博客使用GitHub和hexo的keep主题进行搭建的，依赖数个组件，包括GitHub，hexo，hexo-theme-keep主题，PicX 图床工具，gitalk评论工具等。</p>
+<h1 id="GitHub配置"><a href="#GitHub配置" class="headerlink" title="GitHub配置"></a>GitHub配置</h1><h2 id="建立一个GitHub仓库用于撰写博客"><a href="#建立一个GitHub仓库用于撰写博客" class="headerlink" title="建立一个GitHub仓库用于撰写博客"></a>建立一个GitHub仓库用于撰写博客</h2><p>我的GitHub地址为：<a class="link"   target="_blank" rel="noopener" href="https://github.com/yangli-os/yangli-os.github.io" >https://github.com/yangli-os/yangli-os.github.io<i class="fas fa-external-link-alt"></i></a><br>我的博客地址即为：<a href="https://yangli-os.github.io/">https://yangli-os.github.io</a><br>注意：这里的名字尽量采用用户名+github.io的形式以避免出错。</p>
+<h1 id="安装相关包"><a href="#安装相关包" class="headerlink" title="安装相关包"></a>安装相关包</h1><p>安装Git，配置git ssh，安装Node.js，hexo的操作可以参考文章：<a class="link"   target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26625249" >https://zhuanlan.zhihu.com/p/26625249<i class="fas fa-external-link-alt"></i></a>  </p>
+<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><p>1.hexo相关的所有指令必须在blog文件夹下进行操作，否则不会执行。<br>2.配置hexo完成后，在本地localhost:4000测试后，先不用着急hexo d进行推送，我们安装完keep主题再进行推送。<br>3.如果hexo g出现报错，不建议直接进行hexo d的推送，推送成功会导致github当中的.github和index文件被删除，导致博客崩溃。<br>出现这种情况建议a.恢复_config.yml的配置文件，输入：hexo new “test”，然后hexo g,hexo d，更新github即可恢复。</p>
+<h1 id="下载安装keep主题"><a href="#下载安装keep主题" class="headerlink" title="下载安装keep主题"></a>下载安装keep主题</h1><p>进入到blog文件夹下，输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd theme</span><br><span class="line">npm install hexo-theme-keep</span><br></pre></td></tr></table></figure>
+<h1 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h1><p>复制文件路径blog/theme/hexo-theme-keep下的_config.yml文件，更名为_config.hexo-theme-keep.yml，放到blog的主目录下。</p>
+<h2 id="config-yml配置文件说明"><a href="#config-yml配置文件说明" class="headerlink" title="_config.yml配置文件说明"></a>_config.yml配置文件说明</h2><p>_config.yml文件的修改可以说是整个配置的核心了，耗时又耗力。这里先交代几个注意事项：  </p>
+<p>1.该文件采用的是yml的编写格式，可以使用文本文档的形式打开和编辑，但是注意每一个项目冒号后都有一个英文空格，不加空格会导致报错。<br>2.更换了主题的配置文件主要是有两个，一个是hexo的_config.yml文件，一个是theme当中的hexo-theme-keep主题的配置文件，这个文件要复制之后改名为：<br>_config.hexo-theme-keep.yml，原有的theme文件夹下hexo-theme-keep主题的配置文件_config.yml不变。<br>3.看清配置是在哪个文件下的配置文件。  </p>
+<h2 id="针对hexo的-config-yml配置文件修改"><a href="#针对hexo的-config-yml配置文件修改" class="headerlink" title="针对hexo的_config.yml配置文件修改"></a>针对hexo的_config.yml配置文件修改</h2><p>在blog文件夹下找到_config.yml文件，使用文本文档打开后直接修改，修改的内容有：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: YangLi&#x27;s Blog            # 博客标题</span><br><span class="line"></span><br><span class="line"># URL</span><br><span class="line">url: https://yangli-os.github.io/        # 博客路径</span><br><span class="line"></span><br><span class="line"># 博客的github地址</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  # 格式：git@github.com:用户名/仓库名.git</span><br><span class="line">  repo: git@github.com:yangli-os/yangli-os.github.io.git     # 注意地址后要加.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<p>其他的不用动，subtitle,keywords,author之类的不重要，也不建议改，改了很可能报错。</p>
+<h2 id="针对-config-hexo-theme-keep-yml的修改"><a href="#针对-config-hexo-theme-keep-yml的修改" class="headerlink" title="针对_config.hexo-theme-keep.yml的修改"></a>针对_config.hexo-theme-keep.yml的修改</h2><p>该修改可以参考keep的官方文档：<a class="link"   target="_blank" rel="noopener" href="https://keep.xpoet.cn/2020/11/Keep-%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/" >https://keep.xpoet.cn/2020/11/Keep-%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/<i class="fas fa-external-link-alt"></i></a><br>这里我只列我定制化的内容和需要注意踩坑的地方。</p>
+<h3 id="style"><a href="#style" class="headerlink" title="style"></a>style</h3><p>style是博客当中的各种logo和图片，尽量使用svg格式的图，我的图是在<a class="link"   target="_blank" rel="noopener" href="https://igoutu.cn/icons/set/svg" >https://igoutu.cn/icons/set/svg<i class="fas fa-external-link-alt"></i></a>上下载的。<br>这些图片可以在blog\themes\hexo-theme-keep\source\images的路径下找到，建议把想要上传的图片放到这个路径下进行配置，hexo会自动同步到github的image文件夹下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">style</span><br><span class="line"># Avatar (You can use local image or image external link)</span><br><span class="line">  avatar: /images/饼干.svg         # 这里使用自定义的图标了。   </span><br></pre></td></tr></table></figure>
+<h3 id="social-contact"><a href="#social-contact" class="headerlink" title="social_contact"></a>social_contact</h3><p>社交网络链接需要开启首页的First screen才行，文章里面有，这里不做赘述</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">social_contact:</span><br><span class="line">  enable: true</span><br><span class="line">  links:</span><br><span class="line">    weixin: https://raw.githubusercontent.com/yangli-os/image-hosting/master/20220506/xxx.7l2uxquuvwg0.webp</span><br></pre></td></tr></table></figure>
+<p>这里我是配置的PicX 图床工具进行的，在线使用地址为：<a class="link"   target="_blank" rel="noopener" href="https://picx.xpoet.cn/" >https://picx.xpoet.cn/<i class="fas fa-external-link-alt"></i></a><br>网站上有演示教程，很简单。<br>需要建一个存储图片的github仓，我这里是<a class="link"   target="_blank" rel="noopener" href="https://github.com/yangli-os/image-hosting" >https://github.com/yangli-os/image-hosting<i class="fas fa-external-link-alt"></i></a><br>每次使用可能都需要配置一遍token，然后上传图片，获取复制图片的github外链。</p>
+<h3 id="gitalk评论配置"><a href="#gitalk评论配置" class="headerlink" title="gitalk评论配置"></a>gitalk评论配置</h3><p>这里说需要另外建一个仓库，其实不需要，可以使用上面图床的仓库，也可以使用自己已有的仓库，在仓库里面点击issues，添加一个评论。<br>按照：<a class="link"   target="_blank" rel="noopener" href="https://keep.xpoet.cn/2020/11/Keep-%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/" >keep官方文档<i class="fas fa-external-link-alt"></i></a> 中的教程在<a class="link"   target="_blank" rel="noopener" href="https://github.com/settings/applications/new" >applications<i class="fas fa-external-link-alt"></i></a> 上进行操作<br>_config.hexo-theme-keep.yml上对应的配置修改如下：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">comment:</span><br><span class="line">  enable: true</span><br><span class="line">  use: gitalk # values: valine | gitalk | twikoo</span><br><span class="line"></span><br><span class="line">  gitalk:</span><br><span class="line">    github_id: yangli-os</span><br><span class="line">    repository: image-hosting # Repository name to store issues</span><br><span class="line">    client_id: XXX  # GitHub Application Client ID</span><br><span class="line">    client_secret: XXX  # GitHub Application Client Secret</span><br></pre></td></tr></table></figure>
+<p>配置完成后，需要执行hexo clean，清空界面文件才可以。<br>之后在博客底部会出现评论区，需要登陆github才可以正常使用。</p>
+<h2 id="我的配置文件"><a href="#我的配置文件" class="headerlink" title="我的配置文件"></a>我的配置文件</h2><p>可以点击链接获取我的_config.hexo-theme-keep.yml配置文件：<a class="link"   target="_blank" rel="noopener" href="https://github.com/yangli-os/image-hosting/blob/master/_config.hexo-theme-keep.yml" >_config.hexo-theme-keep.yml<i class="fas fa-external-link-alt"></i></a></p>
+
+        </div>
+
+        
+            <div class="post-copyright-info">
+                <div class="article-copyright-info-container">
+    <ul>
+        <li>Post title：本博客配置方案</li>
+        <li>Post author：Yang Li</li>
+        <li>Create time：2022-05-07 15:53:06</li>
+        <li>
+            Post link：https://yangli-os.github.io//2022/05/07/本博客配置方案/
+        </li>
+        <li>
+            Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
+        </li>
+    </ul>
+</div>
+
+            </div>
+        
+
+        
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/Technology/">#Technology</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/05/06/%E7%A4%BE%E4%BA%A4%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95%E4%BB%A5%E5%8F%8A%E5%9F%BA%E6%9C%AC%E5%9B%BE%E4%BE%8B/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">社交网络分析方法以及基本图例</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+            <div class="comment-container">
+                <div class="comments-container">
+    <div id="comment-anchor"></div>
+    <div class="comment-area-title">
+        <i class="fas fa-comments">&nbsp;Comments</i>
+    </div>
+    
+
+        
+            
+    <div id="gitalk-container"></div>
+    <script data-pjax
+            src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+    <script data-pjax>
+
+        function loadGitalk() {
+            let __gitalk__pathname = decodeURI(location.pathname);
+            const __gitalk__pathnameLength = __gitalk__pathname.length;
+            const __gitalk__pathnameMaxLength = 50;
+            if (__gitalk__pathnameLength > __gitalk__pathnameMaxLength) {
+                __gitalk__pathname = __gitalk__pathname.substring(0, __gitalk__pathnameMaxLength - 3) + '...';
+            }
+
+            try {
+                Gitalk && new Gitalk({
+                    clientID: '838f65b43a27531a0d02',
+                    clientSecret: 'fe71f678bf31af57c5eb0941809ab059e3b61f78',
+                    repo: 'image-hosting',
+                    owner: 'yangli-os',
+                    admin: ['yangli-os'],
+                    id: __gitalk__pathname,
+                    language: 'en'
+                }).render('gitalk-container');
+
+            } catch (e) {
+                window.Gitalk = null;
+            }
+        }
+
+        if ('true') {
+            const loadGitalkTimeout = setTimeout(() => {
+                loadGitalk();
+                clearTimeout(loadGitalkTimeout);
+            }, 1000);
+        } else {
+            window.addEventListener('DOMContentLoaded', loadGitalk);
+        }
+    </script>
+
+
+
+        
+    
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2020</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Yang Li</a>
+        </div>
+        
+            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                    <span id="busuanzi_container_site_uv">
+                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
+                    </span>
+                
+                
+                    <span id="busuanzi_container_site_pv">
+                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
+                    </span>
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+            <li class="go-comment">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">方案概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GitHub%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">GitHub配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AAGitHub%E4%BB%93%E5%BA%93%E7%94%A8%E4%BA%8E%E6%92%B0%E5%86%99%E5%8D%9A%E5%AE%A2"><span class="nav-number">2.1.</span> <span class="nav-text">建立一个GitHub仓库用于撰写博客</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%9B%B8%E5%85%B3%E5%8C%85"><span class="nav-number">3.</span> <span class="nav-text">安装相关包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">注意：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85keep%E4%B8%BB%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">下载安装keep主题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">修改配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#config-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E"><span class="nav-number">5.1.</span> <span class="nav-text">_config.yml配置文件说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%92%88%E5%AF%B9hexo%E7%9A%84-config-yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BF%AE%E6%94%B9"><span class="nav-number">5.2.</span> <span class="nav-text">针对hexo的_config.yml配置文件修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%92%88%E5%AF%B9-config-hexo-theme-keep-yml%E7%9A%84%E4%BF%AE%E6%94%B9"><span class="nav-number">5.3.</span> <span class="nav-text">针对_config.hexo-theme-keep.yml的修改</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#style"><span class="nav-number">5.3.1.</span> <span class="nav-text">style</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#social-contact"><span class="nav-number">5.3.2.</span> <span class="nav-text">social_contact</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gitalk%E8%AF%84%E8%AE%BA%E9%85%8D%E7%BD%AE"><span class="nav-number">5.3.3.</span> <span class="nav-text">gitalk评论配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">5.4.</span> <span class="nav-text">我的配置文件</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/utils.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/main.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/header-shrink.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/back2top.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/dark-light-toggle.js"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/local-search.js"></script>
+
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/code-copy.js"></script>
+
+
+
+
+<div class="post-scripts pjax">
+    
+        <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/left-side-toggle.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/anime.min.js"></script><script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/toc.js"></script>
+    
+</div>
+
+
+    <script src="//cdn.jsdelivr.net/npm/hexo-theme-keep@3.4.5/source/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+            // scrollTo: true,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart();
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd();
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'));
+            KEEP.refresh();
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
