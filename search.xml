@@ -84,6 +84,7 @@
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">comment:</span><br><span class="line">  enable: true</span><br><span class="line">  use: gitalk # values: valine | gitalk | twikoo</span><br><span class="line"></span><br><span class="line">  gitalk:</span><br><span class="line">    github_id: yangli-os</span><br><span class="line">    repository: image-hosting # Repository name to store issues</span><br><span class="line">    client_id: XXX  # GitHub Application Client ID</span><br><span class="line">    client_secret: XXX  # GitHub Application Client Secret</span><br></pre></td></tr></table></figure>
 <p>配置完成后，需要执行hexo clean，清空界面文件才可以。<br>之后在博客底部会出现评论区，需要登陆github才可以正常使用。</p>
 <h2 id="我的配置文件"><a href="#我的配置文件" class="headerlink" title="我的配置文件"></a>我的配置文件</h2><p>可以点击链接获取我的_config.hexo-theme-keep.yml配置文件：<a class="link"   href="https://github.com/yangli-os/image-hosting/blob/master/_config.hexo-theme-keep.yml" >_config.hexo-theme-keep.yml<i class="fas fa-external-link-alt"></i></a></p>
+<h1 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h1><p>使用这种方法搭建的博客，实际上使用的是GitHub Page功能，而这个功能对百度和Google的搜索引擎是反爬虫的，所以这上面的文章没办法搜到。<br>Google想要能搜到的方法：使用Google Search console，添加一个index文件，再添加每一个上传的博客网站（每更新一篇文章，就要去添加一次）<br>这种方法能够Google到博客的内容了。<br>但实测以一样的方法上传index文件等无法在百度上实现搜索（能Google为啥百度呢？）。</p>
 ]]></content>
       <tags>
         <tag>Technology</tag>
