@@ -28,17 +28,80 @@
 
 
 <body>
-<div class="progress-bar-container">
-    
+.progress-bar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: $z-index-9;
 
-    
-        <span class="pjax-progress-bar"></span>
-        <span class="pjax-progress-icon">
-            <i class="fas fa-circle-notch fa-spin"></i>
-        </span>
-    
-</div>
+  if (hexo-config('pjax.enable') == true) {
 
+    .pjax-progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background: var(--pjax-progress-bar-color);
+      visibility: hidden;
+      opacity: 0;
+      z-index: $z-index-8;
+      transition-t("width", "0", "0.1", "linear");
+
+
+      &.show {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+
+    .pjax-progress-icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: $z-index-8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7px 6px 0 0;
+      visibility: hidden;
+      font-size: 1.1rem;
+      color: var(--default-text-color);
+
+      +keep-tablet() {
+        padding: 6px 5px 0 0;
+        font-size: 1rem;
+      }
+
+      &.show {
+        visibility: visible;
+      }
+    }
+
+  }
+
+  if (hexo-config('style.scroll.progress_bar.enable') == true) {
+
+    .scroll-progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: $scroll-progress-bar-height;
+      visibility: hidden;
+      z-index: $z-index-7;
+      background: var(--primary-color);
+      transition-t("width", "0", "0.1", "linear");
+
+      &.hide {
+        display: none !important;
+      }
+    }
+
+  }
+}
 
 <main class="page-container">
 
@@ -47,74 +110,313 @@
     <div class="page-main-content">
 
         <div class="page-main-content-top">
-            <header class="header-wrapper">
+            $logo-title-font-size = 2rem;
+$pc-search-icon-font-size = 1.5rem;
+$menu-bar-line-height = 2.5px;
+$logo-image-box-width = 46px;
 
-    <div class="header-content">
-        <div class="left">
-            
-            <a class="logo-title" href="/">
-                YangLi&#39;s Blog
-            </a>
-        </div>
+.header-wrapper {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-color);
+  padding-top: $scroll-progress-bar-height;
 
-        <div class="right">
-            <div class="pc">
-                <ul class="menu-list">
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
-                                HOME
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class="active"
-                               href="/archives"
-                            >
-                                ARCHIVES
-                            </a>
-                        </li>
-                    
-                    
-                        <li class="menu-item search search-popup-trigger">
-                            <i class="fas fa-search"></i>
-                        </li>
-                    
-                </ul>
-            </div>
-            <div class="mobile">
-                
-                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
-                
-                <div class="icon-item menu-bar">
-                    <div class="menu-bar-middle"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+  hover-style(false, 0, 0);
 
-    <div class="header-drawer">
-        <ul class="drawer-menu-list">
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/">HOME</a>
-                </li>
-            
-                <li class="drawer-menu-item flex-center">
-                    <a class="active"
-                       href="/archives">ARCHIVES</a>
-                </li>
-            
-        </ul>
-    </div>
+  .header-content {
+    position: relative;
+    height: 100%;
+    width: $main-content-width;
+    max-width: $content-max-width;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    z-index: $z-index-5;
 
-    <div class="window-mask"></div>
 
-</header>
+    &.has-first-screen {
+      max-width: $content-max-width * 1.2;
+    }
 
+    +keep-tablet() {
+      width: $main-content-width-tablet;
+    }
+
+    +keep-mobile() {
+      width: $main-content-width-mobile;
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+      transition-t("transform", "0", "0.2", "linear");
+
+      .header-shrink & {
+        transform: scale(0.72);
+        transform-origin: left;
+      }
+
+
+      if (hexo-config('base_info.logo_img') && hexo-config('base_info.logo_img') != '') {
+        .logo-image {
+          width: $logo-image-box-width;
+          height: $logo-image-box-width;
+          margin-right: 8px;
+
+
+          +keep-tablet() {
+            width: $logo-image-box-width * 0.9;
+            height: $logo-image-box-width * 0.9;
+          }
+
+          +keep-mobile() {
+            width: $logo-image-box-width * 0.8;
+            height: $logo-image-box-width * 0.8;
+          }
+
+          img {
+            border-radius: 6px;
+            width: 100%;
+          }
+        }
+
+      }
+
+      .logo-title {
+        font-size: $logo-title-font-size;
+        font-weight: bold;
+        letter-spacing: 1px;
+        line-height: 1;
+        color: var(--first-text-color);
+
+        +keep-tablet() {
+          font-size: $logo-title-font-size * 0.9;
+        }
+
+        +keep-mobile() {
+          font-size: $logo-title-font-size * 0.8;
+        }
+      }
+
+    }
+
+
+    .right {
+
+      .pc {
+
+        .menu-list {
+          display: flex;
+          align-items: center;
+
+          +keep-tablet() {
+            display: none;
+          }
+
+
+          .menu-item {
+            float: left;
+            position: relative;
+            margin-left: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            color: var(--default-text-color);
+
+            &:first-child {
+              margin-left: 0;
+            }
+
+
+            a:hover, .active {
+
+              &::after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                width: 100%;
+                height: 2px;
+                transform: translateX(-50%);
+                background: var(--primary-color);
+                transition-t("transform, bottom", "0, 0", "0.2, 0.2", "linear, linear");
+
+                .header-shrink & {
+                  bottom: -($header-shrink-height / 2 - 12);
+                }
+              }
+            }
+
+            &.search {
+              font-size: $pc-search-icon-font-size;
+              margin-left: 26px;
+
+              i {
+                color: var(--default-text-color);
+              }
+
+            }
+          }
+
+
+        }
+
+      }
+
+
+      .mobile {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .icon-item {
+          display: none;
+          position: relative;
+          cursor: pointer;
+          font-size: 18px;
+          margin-left: 12px;
+          width: 20px;
+          height: 20px;
+          color: var(--default-text-color);
+
+          i {
+            color: var(--default-text-color);
+          }
+
+          &:first-child {
+            margin-left: 0;
+          }
+
+          +keep-tablet() {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+
+        .menu-bar {
+
+          .menu-bar-middle {
+            width: 18px;
+            height: $menu-bar-line-height;
+            position: relative;
+            background: var(--default-text-color);
+
+            .header-drawer-show & {
+              background: transparent;
+            }
+
+
+            &::before, &::after {
+              content: '';
+              position: absolute;
+              left: 0;
+              width: 100%;
+              height: $menu-bar-line-height;
+              background: var(--default-text-color);
+              transition-t("transform", "0", "0.38", "ease");
+            }
+
+
+            &::before {
+              top: -6px;
+
+              .header-drawer-show & {
+                transform: translateY(6px) rotate(45deg);
+              }
+            }
+
+
+            &::after {
+              bottom: -6px;
+
+              .header-drawer-show & {
+                transform: translateY(-6px) rotate(-45deg);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  .header-drawer {
+    width: 100%;
+    padding: $header-height 0 20px 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scaleY(0);
+    transform-origin: top;
+    z-index: $z-index-2;
+    background: var(--background-color);
+    transition-t("transform", "0", "0.38", "ease");
+
+    .header-drawer-show & {
+      transform: scaleY(1);
+    }
+
+    .drawer-menu-list {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+
+      .drawer-menu-item {
+        font-size: 1rem;
+        margin: 6px 0;
+        height: 38px;
+
+        a {
+          padding: 6px 20px;
+          border-radius: 20px;
+          color: var(--default-text-color);
+
+          &:hover {
+            color: var(--second-text-color);
+            border: 1px solid var(--default-text-color);
+          }
+
+
+          &.active {
+            border: 1px solid var(--default-text-color);
+            color: var(--second-text-color);
+          }
+        }
+
+
+      }
+    }
+  }
+
+
+  .window-mask {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: $z-index-1;
+    visibility: hidden;
+    opacity: 0;
+    transition-t("transform, opacity", "0, 0", "0.38, 0.38", "ease, ease");
+
+    .header-drawer-show & {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+}
+
+.header-drawer-show {
+  overflow: hidden;
+}
 
         </div>
 
@@ -125,41 +427,90 @@
                 
                     <div class="fade-in-down-animation">
     <div class="archive-container ">
-        
-<div class="archive-list-container">
-    
-        <section class="archive-item">
-            <div class="archive-item-header">
-                <span class="archive-year">2022</span>
-                <span class="archive-year-post-count">[3]</span>
-            </div>
-            <ul class="article-list">
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2022/05/07/%E6%9C%AC%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE%E6%96%B9%E6%A1%88/"
-                        >本博客配置方案</a>
-                        <span class="article-date">05-07</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2022/05/06/%E7%A4%BE%E4%BA%A4%E7%BD%91%E7%BB%9C%E5%88%86%E6%9E%90%E6%96%B9%E6%B3%95%E4%BB%A5%E5%8F%8A%E5%9F%BA%E6%9C%AC%E5%9B%BE%E4%BE%8B/"
-                        >社交网络分析方法以及基本图例</a>
-                        <span class="article-date">05-06</span>
-                    </li>
-                
-                    <li class="article-item">
-                        <a class="article-title"
-                           href="/2022/05/06/C++%E8%AF%BB%E5%8F%96txt%E6%95%B0%E6%8D%AE%E5%B9%B6%E7%94%9F%E6%88%90%E5%9B%BE%E5%83%8F%EF%BC%8C%E8%AF%86%E5%88%AB%E5%9C%86/"
-                        >C++读取txt数据并生成图像，识别圆</a>
-                        <span class="article-date">05-06</span>
-                    </li>
-                
-            </ul>
-        </section>
-    
-</div>
+        $archive-year-font-size = 1.8rem;
+$archive-year-count-font-size = 1.2rem;
+$article-title-font-size = 1.2rem;
+$article-date-font-size = 1rem;
+
+.archive-list-container {
+
+  .archive-item {
+    margin-bottom: $component-spacing-value;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .archive-item-header {
+      margin-bottom: 10px;
+
+      .archive-year {
+        font-size: $archive-year-font-size;
+
+        +keep-tablet() {
+          font-size: $archive-year-font-size - 0.2rem;
+        }
+
+        color: var(--second-text-color);
+        font-weight: 600;
+        margin-right: 6px;
+      }
+
+
+      .archive-year-post-count {
+        font-size: $archive-year-count-font-size;
+        font-weight: 500;
+        color: var(--second-text-color);
+
+        +keep-tablet() {
+          font-size: $archive-year-count-font-size * 0.9;
+        }
+      }
+
+    }
+
+
+    .article-list {
+
+      padding-left: 10px;
+
+      +keep-tablet() {
+        padding-left: 0;
+      }
+
+      .article-item {
+        font-size: 1rem;
+        margin-top: 18px;
+
+        +keep-tablet() {
+          margin-top: 16px;
+        }
+
+        +keep-mobile() {
+          margin-top: 14px;
+        }
+
+        &:hover {
+          a.article-title, .article-date {
+            color: var(--primary-color);
+          }
+        }
+
+
+        a.article-title {
+          color: var(--default-text-color);
+        }
+
+        .article-date {
+          font-size: $article-date-font-size;
+          float: right;
+        }
+      }
+    }
+  }
+}
+
+
 
     </div>
 </div>
@@ -170,38 +521,35 @@
         </div>
 
         <div class="page-main-content-bottom">
-            <footer class="footer">
-    <div class="info-container">
-        <div class="copyright-info info-item">
-            &copy;
-            
-              <span>2020</span>
-              -
-            
-            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Yang Li</a>
-        </div>
-        
-            <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-            <div class="website-count info-item">
-                
-                    <span id="busuanzi_container_site_uv">
-                        Visitor Count&nbsp;<span id="busuanzi_value_site_uv"></span>&ensp;
-                    </span>
-                
-                
-                    <span id="busuanzi_container_site_pv">
-                        Totalview&nbsp;<span id="busuanzi_value_site_pv"></span>
-                    </span>
-                
-            </div>
-        
-        <div class="theme-info info-item">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.5</a>
-        </div>
-        
-        
-    </div>
-</footer>
+            .footer {
+  font-size: 1rem;
+  color: var(--third-text-color);
+
+
+  a {
+    color: var(--third-text-color);
+
+
+    &:hover {
+      color: var(--primary-color);
+
+    }
+  }
+
+  .info-container {
+    padding-bottom: 10px;
+    text-align: center;
+  }
+
+  .info-item {
+    margin: 5px 0;
+  }
+
+  .icon-animate {
+    animation: icon-animate 1.2s ease-in-out infinite;
+  }
+
+}
 
         </div>
     </div>
@@ -209,83 +557,340 @@
     
 
     <div class="right-bottom-side-tools">
-        <div class="side-tools-container">
-    <ul class="side-tools-list">
-        <li class="tools-item tool-font-adjust-plus flex-center">
-            <i class="fas fa-search-plus"></i>
-        </li>
+        $tools-item-width = 32px;
+$tools-item-font-size = 1.1rem;
+$tools-item-border-radius = 1px;
 
-        <li class="tools-item tool-font-adjust-minus flex-center">
-            <i class="fas fa-search-minus"></i>
-        </li>
 
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
-        </li>
+.side-tools-container {
+  position: relative;
 
-        <li class="tools-item tool-dark-light-toggle flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
+  .tools-item {
+    width: $tools-item-width;
+    height: $tools-item-width;
+    font-size: $tools-item-font-size;
+    margin-bottom: 3px;
+    cursor: pointer;
+    border-right: none;
+    border-radius: $tools-item-border-radius;
+    box-shadow: 1px 1px 3px var(--shadow-color);
+    color: var(--default-text-color);
+    background: var(--background-color);
 
-        <!-- rss -->
-        
+    i {
+      color: var(--default-text-color);
+    }
 
-        
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="fas fa-arrow-up"></i>
-            </li>
-        
+    &:hover {
+      color: var(--background-color);
+      background: var(--primary-color);
+      box-shadow: 2px 2px 6px var(--shadow-color);
 
-        <li class="tools-item tool-scroll-to-bottom flex-center">
-            <i class="fas fa-arrow-down"></i>
-        </li>
-    </ul>
+      i {
+        color: var(--background-color);
+      }
+    }
 
-    <ul class="exposed-tools-list">
-        <li class="tools-item tool-toggle-show flex-center">
-            <i class="fas fa-cog fa-spin"></i>
-        </li>
-        
-    </ul>
-</div>
+    +keep-tablet() {
+      width: $tools-item-width * 0.9;
+      height: $tools-item-width * 0.9;
+      font-size: $tools-item-font-size * 0.9;
+      margin-bottom: 2px;
+    }
+
+    &.rss {
+
+      a {
+        border-radius: $tools-item-border-radius;
+        width: 100%;
+        height: 100%;
+
+        &:hover {
+          color: var(--background-color);
+          background: var(--primary-color);
+          box-shadow: 2px 2px 6px var(--shadow-color);
+        }
+      }
+    }
+  }
+
+
+  .side-tools-list {
+    opacity: 0;
+    transform: translateX(100%);
+    transition-t("transform, opacity", "0, 0", "0.2, 0.2", "linear, linear");
+
+    .tool-expand-width {
+      +keep-tablet() {
+        display: none;
+      }
+    }
+
+
+    &.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+
+  .exposed-tools-list {
+
+    if (hexo-config('style.scroll.percent.enable') == true) {
+      .tool-scroll-to-top {
+        display: none;
+
+        &.show {
+          display: flex;
+        }
+
+        &:hover {
+
+          .percent {
+            display: none;
+          }
+
+          .arrow-up {
+            display: flex;
+          }
+
+        }
+
+        .arrow-up {
+          display: none;
+        }
+
+        .percent {
+          display: flex;
+          font-size: 1rem;
+        }
+
+      }
+
+    }
+  }
+}
 
     </div>
 
     
 
-    <div class="image-viewer-container">
-    <img src="">
-</div>
+    .image-viewer-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0);
+  visibility: hidden;
+  z-index: $z-index-8;
+  padding: 6%;
+  box-sizing: border-box;
+  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
+
+  &.active {
+    background: rgba(0, 0, 0, 0.5);
+    visibility: visible;
+
+    img {
+      cursor: zoom-out;
+      transform: scale(1);
+      padding: 2px;
+      background: var(--background-color);
+    }
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    transform: scale(0);
+    transition-t("transform", "0", "0.3", "ease");
+  }
+}
+
+
 
 
     
-        <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-          <span class="search-input-field-pre">
-            <i class="fas fa-keyboard"></i>
-          </span>
-            <div class="search-input-container">
-                <input autocomplete="off"
-                       autocorrect="off"
-                       autocapitalize="off"
-                       placeholder="Search..."
-                       spellcheck="false"
-                       type="search"
-                       class="search-input"
-                >
-            </div>
-            <span class="popup-btn-close">
-                <i class="fas fa-times"></i>
-            </span>
-        </div>
-        <div id="search-result">
-            <div id="no-result">
-                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
-            </div>
-        </div>
-    </div>
-</div>
+        $icon-size = 1.2rem;
+
+.search-pop-overlay {
+  position: fixed;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0);
+  visibility: hidden;
+  z-index: $z-index-8;
+  transition-t("visibility, background", "0, 0", "0.3, 0.3", "ease, ease");
+
+  &.active {
+    visibility: visible;
+    background: rgba(0, 0, 0, 0.35);
+
+    .search-popup {
+      transform: scale(1);
+    }
+
+  }
+
+
+  .search-popup {
+    background: var(--background-color);
+    border-radius: 5px;
+    height: 80%;
+    width: 70%;
+    margin: auto;
+    transform: scale(0);
+    z-index: $z-index-6;
+    transition-t("transform", "0", "0.3", "ease");
+
+    +keep-tablet() {
+      width: 80%;
+    }
+
+    +keep-mobile() {
+      width: 90%;
+    }
+
+    .search-header {
+      background: var(--fourth-text-color);
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+      display: flex;
+      padding: 10px;
+
+      .search-input-field-pre, .popup-btn-close {
+        font-size: $icon-size;
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+      }
+
+      .search-input-field-pre {
+        cursor: pointer;
+        color: var(--third-text-color);
+      }
+
+      .popup-btn-close {
+        color: var(--default-text-color);
+      }
+
+
+      .search-input-container {
+
+        flex-grow: 1;
+        padding: 2px;
+
+        .search-input {
+          background: transparent;
+          border: 0;
+          outline: 0;
+          width: 100%;
+          font-size: 1.2rem;
+          color: var(--default-text-color);
+
+          &::-webkit-search-cancel-button {
+            display: none;
+          }
+        }
+
+
+      }
+
+
+      .popup-btn-close {
+        cursor: pointer;
+
+        &:hover .fas, far, fab {
+          color: var(--first-text-color);
+        }
+      }
+
+    }
+
+
+    #search-result {
+      display: flex;
+      height: calc(100% - 55px);
+      overflow: auto;
+      padding: 5px 25px;
+
+      .search-result-list {
+        width: 100%;
+        height: 100%;
+        font-size: 1rem;
+
+        li {
+          border-bottom: 1px dashed var(--border-color);
+          padding: 10px 0;
+          margin: 10px 0;
+          box-sizing: border-box;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+
+          .search-result-title {
+            position: relative;
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding-left: 16px;
+            display: flex;
+            align-items: center;
+
+            &::after {
+              content: '';
+              position: absolute;
+              width: 5px;
+              height: 5px;
+              border-radius: 50%;
+              top: 50%;
+              transform: translateY(-50%);
+              left: 0;
+              background: var(--default-text-color);
+            }
+          }
+
+
+          .search-result {
+            line-height: 2rem;
+            margin: 0;
+            padding-left: 16px;
+            word-wrap: break-word;
+          }
+
+          a {
+            &:hover {
+              color: var(--default-text-color);
+            }
+          }
+
+          .search-keyword {
+            border-bottom: 1px dashed var(--primary-color);
+            color: var(--primary-color);
+            font-weight: bold;
+          }
+
+        }
+      }
+
+
+      #no-result {
+        color: var(--third-text-color);
+        margin: auto;
+      }
+
+    }
+  }
+}
+
 
     
 
