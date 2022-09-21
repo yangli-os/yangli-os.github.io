@@ -9,6 +9,8 @@
     
     <title>
         
+            深度学习——模型评价篇 |
+        
         YangLi&#39;s Blog
     </title>
     
@@ -125,7 +127,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation"></span>
+            <span class="title-hover-animation">深度学习——模型评价篇</span>
         </div>
 
         
@@ -144,10 +146,21 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-09-20 22:21:32</span>
-        <span class="mobile">2022-09-20 22:21</span>
+        <span class="pc">2022-08-15 21:12:00</span>
+        <span class="mobile">2022-08-15 21:12</span>
     </span>
     
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
     
 
     
@@ -166,10 +179,7 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="深度学习——模型评价"><a href="#深度学习——模型评价" class="headerlink" title="深度学习——模型评价"></a>深度学习——模型评价</h1><hr>
-<p>title: 深度学习——模型评价篇<br>date: 2022-08-15 21:12<br>tags: 深度学习</p>
-<hr>
-<h1 id="1-测试集准确率的计算"><a href="#1-测试集准确率的计算" class="headerlink" title="1.测试集准确率的计算"></a>1.测试集准确率的计算</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># 保存模型</span><br><span class="line">PATH = &#x27;./NIR.pth&#x27;</span><br><span class="line">torch.save(network.state_dict(), PATH)</span><br><span class="line"># 加载模型</span><br><span class="line">network = Network()</span><br><span class="line">network.load_state_dict(torch.load(PATH))</span><br><span class="line"></span><br><span class="line">@torch.no_grad()</span><br><span class="line">def get_all_preds(model, loader):</span><br><span class="line">    all_preds = torch.tensor([])</span><br><span class="line">    print(len(loader))</span><br><span class="line">    for batch in loader:</span><br><span class="line">        images, labels = batch</span><br><span class="line"></span><br><span class="line">        preds = model(images)</span><br><span class="line">        all_preds = torch.cat((all_preds, preds) ,dim=0)</span><br><span class="line"></span><br><span class="line">    return all_preds</span><br><span class="line"></span><br><span class="line">test_preds = get_all_preds(network, test_loader)</span><br><span class="line">actual_labels_test = torch.Tensor(test_data.labels)</span><br><span class="line">preds_correct_test = test_preds.argmax(dim=1).eq(actual_labels_test).sum().item()</span><br><span class="line"></span><br><span class="line">print(&#x27;total correct:&#x27;, preds_correct_test)</span><br><span class="line">print(&#x27;accuracy_test:&#x27;, preds_correct_test / len(test_data))</span><br></pre></td></tr></table></figure>
+            <h1 id="1-测试集准确率的计算"><a href="#1-测试集准确率的计算" class="headerlink" title="1.测试集准确率的计算"></a>1.测试集准确率的计算</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># 保存模型</span><br><span class="line">PATH = &#x27;./NIR.pth&#x27;</span><br><span class="line">torch.save(network.state_dict(), PATH)</span><br><span class="line"># 加载模型</span><br><span class="line">network = Network()</span><br><span class="line">network.load_state_dict(torch.load(PATH))</span><br><span class="line"></span><br><span class="line">@torch.no_grad()</span><br><span class="line">def get_all_preds(model, loader):</span><br><span class="line">    all_preds = torch.tensor([])</span><br><span class="line">    print(len(loader))</span><br><span class="line">    for batch in loader:</span><br><span class="line">        images, labels = batch</span><br><span class="line"></span><br><span class="line">        preds = model(images)</span><br><span class="line">        all_preds = torch.cat((all_preds, preds) ,dim=0)</span><br><span class="line"></span><br><span class="line">    return all_preds</span><br><span class="line"></span><br><span class="line">test_preds = get_all_preds(network, test_loader)</span><br><span class="line">actual_labels_test = torch.Tensor(test_data.labels)</span><br><span class="line">preds_correct_test = test_preds.argmax(dim=1).eq(actual_labels_test).sum().item()</span><br><span class="line"></span><br><span class="line">print(&#x27;total correct:&#x27;, preds_correct_test)</span><br><span class="line">print(&#x27;accuracy_test:&#x27;, preds_correct_test / len(test_data))</span><br></pre></td></tr></table></figure>
 <p>这里注意一个问题，我想知道我在训练集上的模型准确率，直接按照accuracy_test的计算方式进行计算，我适用的是train_data.laber。但是这里我发现，因为我设置了batch_size为16，而数据总数是415，所以我发现在经过batch_size后，我的train_loader为25个batch_size，即为400个，train_data为415，这个就是在batch_size无法整除数据时所造成的问题。</p>
 <p>那么从另一个点上也就是说，我实际上只有400个数据参与了模型训练，而不是415个。</p>
 <h1 id="2-输出最后一层的预测概率"><a href="#2-输出最后一层的预测概率" class="headerlink" title="2.输出最后一层的预测概率"></a>2.输出最后一层的预测概率</h1><p>调整输出的灵敏度和特异度的时候需要调整预测概率。验证集的训练方法如下：</p>
@@ -184,11 +194,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：</li>
+        <li>Post title：深度学习——模型评价篇</li>
         <li>Post author：Yang Li</li>
-        <li>Create time：2022-09-20 22:21:32</li>
+        <li>Create time：2022-08-15 21:12:00</li>
         <li>
-            Post link：https://yangli-os.github.io//2022/09/20/深度学习-模型评估篇/
+            Post link：https://yangli-os.github.io//2022/08/15/深度学习-模型评估篇/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -200,6 +210,14 @@
         
 
         
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
 
         
             <div class="article-nav">
@@ -207,13 +225,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2022/09/20/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/"
+                           href="/2022/08/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item"></span>
+                                <span class="post-nav-title-item">深度学习——模型训练篇</span>
                                 <span class="post-nav-item">Prev posts</span>
                             </span>
                         </a>
@@ -223,10 +241,10 @@
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/09/20/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%95%B0%E6%8D%AE%E7%AF%87/"
+                           href="/2022/05/07/%E6%9C%AC%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE%E6%96%B9%E6%A1%88/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item"></span>
+                                <span class="post-nav-title-item">本博客配置方案</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -412,7 +430,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BB%B7"><span class="nav-number">1.</span> <span class="nav-text">深度学习——模型评价</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%B5%8B%E8%AF%95%E9%9B%86%E5%87%86%E7%A1%AE%E7%8E%87%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="nav-number">2.</span> <span class="nav-text">1.测试集准确率的计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E8%BE%93%E5%87%BA%E6%9C%80%E5%90%8E%E4%B8%80%E5%B1%82%E7%9A%84%E9%A2%84%E6%B5%8B%E6%A6%82%E7%8E%87"><span class="nav-number">3.</span> <span class="nav-text">2.输出最后一层的预测概率</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%89%8B%E5%8A%A8%E8%AE%A1%E7%AE%97%E7%81%B5%E6%95%8F%E5%BA%A6%EF%BC%8C%E7%89%B9%E5%BC%82%E5%BA%A6%EF%BC%8C%E5%87%86%E7%A1%AE%E7%8E%87%E7%AD%89%E5%8F%82%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">3.手动计算灵敏度，特异度，准确率等参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E7%94%BB%E4%B8%80%E4%B8%AAmatrix%E5%9B%BE%EF%BC%8C%E5%B1%95%E7%A4%BA%E6%AD%A3%E7%A1%AE%E6%97%B6%E9%94%99%E8%AF%AF%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">5.</span> <span class="nav-text">4.画一个matrix图，展示正确时错误的数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E7%94%BBLOSS%E6%9B%B2%E7%BA%BF%E5%9B%BE"><span class="nav-number">6.</span> <span class="nav-text">5.画LOSS曲线图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">6.1.</span> <span class="nav-text">最简单的一种方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86LOSS%E5%92%8CACC%E7%94%BB%E5%88%B0%E4%B8%80%E8%B5%B7%E7%9A%84"><span class="nav-number">6.2.</span> <span class="nav-text">将LOSS和ACC画到一起的</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%B5%8B%E8%AF%95%E9%9B%86%E5%87%86%E7%A1%AE%E7%8E%87%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="nav-number">1.</span> <span class="nav-text">1.测试集准确率的计算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E8%BE%93%E5%87%BA%E6%9C%80%E5%90%8E%E4%B8%80%E5%B1%82%E7%9A%84%E9%A2%84%E6%B5%8B%E6%A6%82%E7%8E%87"><span class="nav-number">2.</span> <span class="nav-text">2.输出最后一层的预测概率</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%89%8B%E5%8A%A8%E8%AE%A1%E7%AE%97%E7%81%B5%E6%95%8F%E5%BA%A6%EF%BC%8C%E7%89%B9%E5%BC%82%E5%BA%A6%EF%BC%8C%E5%87%86%E7%A1%AE%E7%8E%87%E7%AD%89%E5%8F%82%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">3.手动计算灵敏度，特异度，准确率等参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E7%94%BB%E4%B8%80%E4%B8%AAmatrix%E5%9B%BE%EF%BC%8C%E5%B1%95%E7%A4%BA%E6%AD%A3%E7%A1%AE%E6%97%B6%E9%94%99%E8%AF%AF%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">4.</span> <span class="nav-text">4.画一个matrix图，展示正确时错误的数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E7%94%BBLOSS%E6%9B%B2%E7%BA%BF%E5%9B%BE"><span class="nav-number">5.</span> <span class="nav-text">5.画LOSS曲线图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84%E4%B8%80%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">5.1.</span> <span class="nav-text">最简单的一种方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%86LOSS%E5%92%8CACC%E7%94%BB%E5%88%B0%E4%B8%80%E8%B5%B7%E7%9A%84"><span class="nav-number">5.2.</span> <span class="nav-text">将LOSS和ACC画到一起的</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>

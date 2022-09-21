@@ -9,6 +9,8 @@
     
     <title>
         
+            深度学习——模型训练篇 |
+        
         YangLi&#39;s Blog
     </title>
     
@@ -125,7 +127,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation"></span>
+            <span class="title-hover-animation">深度学习——模型训练篇</span>
         </div>
 
         
@@ -144,10 +146,21 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-09-20 22:22:58</span>
-        <span class="mobile">2022-09-20 22:22</span>
+        <span class="pc">2022-08-15 21:12:00</span>
+        <span class="mobile">2022-08-15 21:12</span>
     </span>
     
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
     
 
     
@@ -166,10 +179,7 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="深度学习——模型训练"><a href="#深度学习——模型训练" class="headerlink" title="深度学习——模型训练"></a>深度学习——模型训练</h1><hr>
-<p>title: 深度学习——模型训练篇<br>date: 2022-08-15 21:12<br>tags: 深度学习</p>
-<hr>
-<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>这一章节主要介绍模型如何搭建起来的，以及模型上的一些训练方法。  </p>
+            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>这一章节主要介绍模型如何搭建起来的，以及模型上的一些训练方法。  </p>
 <h1 id="1-模型搭建"><a href="#1-模型搭建" class="headerlink" title="1.模型搭建"></a>1.模型搭建</h1><h2 id="1-1-直接训练"><a href="#1-1-直接训练" class="headerlink" title="1.1 直接训练"></a>1.1 直接训练</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">loss_list = []</span><br><span class="line">acc_list = []</span><br><span class="line"></span><br><span class="line">class Network(nn.Module):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(Network,self).__init__()</span><br><span class="line">        self.conv1 = nn.Conv2d(in_channels=3, out_channels=256, kernel_size=7,stride=2)</span><br><span class="line">        self.conv2 = nn.Conv2d(in_channels=256, out_channels=16, kernel_size=7,stride=2)</span><br><span class="line">        self.conv3 = nn.Conv2d(in_channels=16, out_channels=16, kernel_size=5)</span><br><span class="line">        self.conv4 = nn.Conv2d(in_channels=16, out_channels=16, kernel_size=[8,4])</span><br><span class="line"></span><br><span class="line">        self.fc1 = nn.Linear(in_features=16, out_features=16)</span><br><span class="line">        self.out = nn.Linear(in_features=16, out_features=2)</span><br><span class="line">    def forward(self, t):</span><br><span class="line">        #Layer 1</span><br><span class="line">        t = t</span><br><span class="line">        #Layer 2</span><br><span class="line">        t = self.conv1(t)</span><br><span class="line">        t = F.relu(t)</span><br><span class="line">        t = F.max_pool2d(t, kernel_size=2, stride=2)#output shape : (6,14,14)</span><br><span class="line">        #Layer 3</span><br><span class="line">        t = self.conv2(t)</span><br><span class="line">        t = F.relu(t)</span><br><span class="line">        t = F.max_pool2d(t, kernel_size=2, stride=2)#output shape : (6,14,14)</span><br><span class="line">        #Layer 4</span><br><span class="line">        t = self.conv3(t)</span><br><span class="line">        t = F.relu(t)</span><br><span class="line">        t = F.max_pool2d(t, kernel_size=2, stride=2)#output shape : (6,14,14)</span><br><span class="line">        #Layer 5      </span><br><span class="line">        t = self.conv4(t)</span><br><span class="line">        t = F.relu(t)</span><br><span class="line">        </span><br><span class="line">        #Layer 5</span><br><span class="line">        t=t.flatten(start_dim=1)</span><br><span class="line">        t = self.fc1(t)</span><br><span class="line">        t = F.relu(t)#output shape : (1,120)</span><br><span class="line">        #Layer 5</span><br><span class="line">        t = self.out(t)</span><br><span class="line"></span><br><span class="line">        return t</span><br><span class="line"></span><br><span class="line">network = Network()</span><br><span class="line"></span><br><span class="line">print(network)</span><br><span class="line">optimizer = optim.Adam(network.parameters(), lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=0)</span><br></pre></td></tr></table></figure>
 <p>我batch_size的设置更改的比较多，再调整模型参数时主要调整了卷积的层数，神经元个数，卷积核的尺寸以及stride等。这里对参数需要注意的地方逐一记录一下。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nn.Conv2d(in_channels=3, out_channels=256, kernel_size=7,stride=2)</span><br></pre></td></tr></table></figure>
@@ -203,11 +213,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：</li>
+        <li>Post title：深度学习——模型训练篇</li>
         <li>Post author：Yang Li</li>
-        <li>Create time：2022-09-20 22:22:58</li>
+        <li>Create time：2022-08-15 21:12:00</li>
         <li>
-            Post link：https://yangli-os.github.io//2022/09/20/深度学习-模型训练/
+            Post link：https://yangli-os.github.io//2022/08/15/深度学习-模型训练/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -219,18 +229,41 @@
         
 
         
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
 
         
             <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/08/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%95%B0%E6%8D%AE%E7%AF%87/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">深度学习——数据篇</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
                 
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/09/20/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E7%AF%87/"
+                           href="/2022/08/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E7%AF%87/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item"></span>
+                                <span class="post-nav-title-item">深度学习——模型评价篇</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -416,7 +449,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="nav-number">1.</span> <span class="nav-text">深度学习——模型训练</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%A8%A1%E5%9E%8B%E6%90%AD%E5%BB%BA"><span class="nav-number">3.</span> <span class="nav-text">1.模型搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E7%9B%B4%E6%8E%A5%E8%AE%AD%E7%BB%83"><span class="nav-number">3.1.</span> <span class="nav-text">1.1 直接训练</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3t-reshape-1-%E2%80%A6-%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">3.1.1.</span> <span class="nav-text">解决t.reshape(-1,…)的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Finetune%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83"><span class="nav-number">3.2.</span> <span class="nav-text">1.2 Finetune模型微调</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BF%AE%E6%94%B9%E9%83%A8%E5%88%86%E5%B1%82%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">3.2.1.</span> <span class="nav-text">指修改部分层的参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">2.自定义损失函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%AE%9E%E9%99%85%E8%AE%AD%E7%BB%83"><span class="nav-number">5.</span> <span class="nav-text">3.实际训练</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%A8%A1%E5%9E%8B%E6%90%AD%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">1.模型搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E7%9B%B4%E6%8E%A5%E8%AE%AD%E7%BB%83"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 直接训练</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3t-reshape-1-%E2%80%A6-%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.1.</span> <span class="nav-text">解决t.reshape(-1,…)的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Finetune%E6%A8%A1%E5%9E%8B%E5%BE%AE%E8%B0%83"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 Finetune模型微调</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BF%AE%E6%94%B9%E9%83%A8%E5%88%86%E5%B1%82%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">2.2.1.</span> <span class="nav-text">指修改部分层的参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">2.自定义损失函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E5%AE%9E%E9%99%85%E8%AE%AD%E7%BB%83"><span class="nav-number">4.</span> <span class="nav-text">3.实际训练</span></a></li></ol>
     </div>
 </div>
         </aside>

@@ -9,6 +9,8 @@
     
     <title>
         
+            深度学习——数据篇 |
+        
         YangLi&#39;s Blog
     </title>
     
@@ -125,7 +127,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation"></span>
+            <span class="title-hover-animation">深度学习——数据篇</span>
         </div>
 
         
@@ -144,10 +146,21 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-09-20 20:51:36</span>
-        <span class="mobile">2022-09-20 20:51</span>
+        <span class="pc">2022-08-15 21:12:00</span>
+        <span class="mobile">2022-08-15 21:12</span>
     </span>
     
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
     
 
     
@@ -166,10 +179,7 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="深度学习——数据篇"><a href="#深度学习——数据篇" class="headerlink" title="深度学习——数据篇"></a>深度学习——数据篇</h1><hr>
-<p>title: 深度学习——数据篇<br>date: 2022-08-15 21:12<br>tags: 深度学习</p>
-<hr>
-<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>以下使用公开数据集，是在公开数据集上进行了一些图像变换和转换。在建模之前的一些必要处理。</p>
+            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>以下使用公开数据集，是在公开数据集上进行了一些图像变换和转换。在建模之前的一些必要处理。</p>
 <p>把数据相关的处理都放到这一章的内容中进行介绍。</p>
 <p>注意，开源数据集有一些是可以直接通过pytorch的包load之后直接使用的，没有必要全都转化成.jpg这样的图片格式。有一些数据集下载下来是纯图片和标签，就需要我们手动进行处理，这里只是为了分享经验。如果是打算直接从图片开始，可以跳过前面的部分。</p>
 <h1 id="1-数据集"><a href="#1-数据集" class="headerlink" title="1.数据集"></a>1.数据集</h1><h2 id="下载开源数据集"><a href="#下载开源数据集" class="headerlink" title="下载开源数据集"></a>下载开源数据集</h2><p>数据集去官网即可找到，这里举一个例子。可以在下面的链接下载官方版本，我下载的是FIFAR-100 Python版本。<br><a class="link"   target="_blank" rel="noopener" href="https://www.cs.toronto.edu/~kriz/cifar.html" >https://www.cs.toronto.edu/~kriz/cifar.html<i class="fas fa-external-link-alt"></i></a></p>
@@ -195,11 +205,11 @@
             <div class="post-copyright-info">
                 <div class="article-copyright-info-container">
     <ul>
-        <li>Post title：</li>
+        <li>Post title：深度学习——数据篇</li>
         <li>Post author：Yang Li</li>
-        <li>Create time：2022-09-20 20:51:36</li>
+        <li>Create time：2022-08-15 21:12:00</li>
         <li>
-            Post link：https://yangli-os.github.io//2022/09/20/深度学习-数据篇/
+            Post link：https://yangli-os.github.io//2022/08/15/深度学习-数据篇/
         </li>
         <li>
             Copyright Notice：All articles in this blog are licensed under <a class="license" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">BY-NC-SA</a> unless stating additionally.
@@ -211,33 +221,26 @@
         
 
         
+            <ul class="post-tags-box">
+                
+                    <li class="tag-item">
+                        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">#深度学习</a>&nbsp;
+                    </li>
+                
+            </ul>
+        
 
         
             <div class="article-nav">
-                
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2022/09/20/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E7%AF%87/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item"></span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
                 
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/05/07/%E6%9C%AC%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE%E6%96%B9%E6%A1%88/"
+                           href="/2022/08/15/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">本博客配置方案</span>
+                                <span class="post-nav-title-item">深度学习——模型训练篇</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -423,7 +426,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E6%95%B0%E6%8D%AE%E7%AF%87"><span class="nav-number">1.</span> <span class="nav-text">深度学习——数据篇</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">3.</span> <span class="nav-text">1.数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%BC%80%E6%BA%90%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">3.1.</span> <span class="nav-text">下载开源数据集</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E9%9B%86%E8%BD%AC%E5%9B%BE%E7%89%87"><span class="nav-number">4.</span> <span class="nav-text">2.数据集转图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%8F%90%E5%8F%96%E6%A0%87%E7%AD%BE"><span class="nav-number">5.</span> <span class="nav-text">3.提取标签</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E7%94%9F%E6%88%90%E6%A0%87%E6%B3%A8%E6%96%87%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">4.生成标注文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E8%87%AA%E5%B7%B1%E5%88%86%E5%89%B2%E8%AE%AD%E7%BB%83%E9%9B%86%E5%92%8C%E6%B5%8B%E8%AF%95%E9%9B%86"><span class="nav-number">7.</span> <span class="nav-text">5.自己分割训练集和测试集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E4%BB%8E%E5%88%87%E5%88%86%E5%90%8E%E7%9A%84%E5%9B%BE%E5%83%8F%E4%B8%AD%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">8.</span> <span class="nav-text">6.从切分后的图像中加载数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E5%8A%A0%E8%BD%BD"><span class="nav-number">8.1.</span> <span class="nav-text">自定义图片数据集的加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transforms-Compose%E7%9A%84%E4%B8%80%E4%BA%9B%E7%94%A8%E6%B3%95"><span class="nav-number">8.2.</span> <span class="nav-text">transforms.Compose的一些用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%95%B0%E6%8D%AE%E4%B8%8D%E8%83%BD%E8%A2%ABbatch-size%E6%95%B4%E9%99%A4%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%8C%E4%BD%BF%E7%94%A8drop-last"><span class="nav-number">8.3.</span> <span class="nav-text">解决数据不能被batch_size整除的问题，使用drop_last</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E6%98%BE%E7%A4%BA%E5%8D%95%E5%BC%A0%E5%9B%BE%E7%89%87"><span class="nav-number">9.</span> <span class="nav-text">7.显示单张图片</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.</span> <span class="nav-text">1.数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E5%BC%80%E6%BA%90%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">2.1.</span> <span class="nav-text">下载开源数据集</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E9%9B%86%E8%BD%AC%E5%9B%BE%E7%89%87"><span class="nav-number">3.</span> <span class="nav-text">2.数据集转图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%8F%90%E5%8F%96%E6%A0%87%E7%AD%BE"><span class="nav-number">4.</span> <span class="nav-text">3.提取标签</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-%E7%94%9F%E6%88%90%E6%A0%87%E6%B3%A8%E6%96%87%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">4.生成标注文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-%E8%87%AA%E5%B7%B1%E5%88%86%E5%89%B2%E8%AE%AD%E7%BB%83%E9%9B%86%E5%92%8C%E6%B5%8B%E8%AF%95%E9%9B%86"><span class="nav-number">6.</span> <span class="nav-text">5.自己分割训练集和测试集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E4%BB%8E%E5%88%87%E5%88%86%E5%90%8E%E7%9A%84%E5%9B%BE%E5%83%8F%E4%B8%AD%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">7.</span> <span class="nav-text">6.从切分后的图像中加载数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E5%8A%A0%E8%BD%BD"><span class="nav-number">7.1.</span> <span class="nav-text">自定义图片数据集的加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transforms-Compose%E7%9A%84%E4%B8%80%E4%BA%9B%E7%94%A8%E6%B3%95"><span class="nav-number">7.2.</span> <span class="nav-text">transforms.Compose的一些用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%95%B0%E6%8D%AE%E4%B8%8D%E8%83%BD%E8%A2%ABbatch-size%E6%95%B4%E9%99%A4%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%8C%E4%BD%BF%E7%94%A8drop-last"><span class="nav-number">7.3.</span> <span class="nav-text">解决数据不能被batch_size整除的问题，使用drop_last</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-%E6%98%BE%E7%A4%BA%E5%8D%95%E5%BC%A0%E5%9B%BE%E7%89%87"><span class="nav-number">8.</span> <span class="nav-text">7.显示单张图片</span></a></li></ol>
     </div>
 </div>
         </aside>
